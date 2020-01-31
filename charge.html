@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>摩天轮</title>
+    <title>充值现金</title>
     <meta property="og:image" content="https://gw.alipayobjects.com/mdn/credit_1212/afts/img/A*W0oeRouF_6sAAAAAAAAAAABjAQAAAQ/original">
     <link rel="shortcut icon" type="image/png" href="https://gw.alipayobjects.com/mdn/credit_1212/afts/img/A*W0oeRouF_6sAAAAAAAAAAABjAQAAAQ/original">
     <meta name="description" content="" />
@@ -108,81 +108,9 @@ html {
 
 body {
   font-size: 0.16rem;
+  background: #E5E5E1;
 }
 
-.machine {
-  margin: 1rem auto 0;
-  width: 3rem;
-  height: 3rem;
-  border: black;
-  position: relative;
-  background: url(https://gw.alipayobjects.com/mdn/rms_f839dd/afts/img/A*wizXSZirglUAAAAAAAAAAABkARQnAQ);
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.action {
-  animation: orbit-rotate 10s linear infinite;
-}
-
-.item {
-  position: absolute;
-  width: 0.75rem;
-  height: 0.75rem;
-  font-size: 0.16rem;
-}
-
-.item.img-here {
-  background: url(https://gw.alipayobjects.com/mdn/rms_f839dd/afts/img/A*tsdrSqlnzxMAAAAAAAAAAABkARQnAQ);
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.item:first-child {
-  top: 0;
-  left: 0;
-  background-color: #FF3333;
-}
-
-.item:nth-child(2) {
-  top: 0;
-  right: 0;
-  background-color: #FFEAEA;
-}
-
-.item:nth-child(3) {
-  bottom: 0;
-  right: 0;
-  background-color: #4C6CF0;
-}
-
-.item:nth-child(4) {
-  bottom: 0;
-  left: 0;
-  background-color: #50FA10;
-}
-
-@keyframes orbit-rotate {
-  0% {
-    transform: rotateZ(0deg);
-    /* transform-origin: 0rem 1rem; */
-  }
-
-  100% {
-    transform: rotateZ(-360deg);
-    /* transform-origin: 0rem 1rem; */
-  } 
-}
-
-.kiss-btn {
-  margin-top: 0.3rem;
-}
-
-
-.tips {
-  text-align: center;
-  margin: 0.14rem;
-}
 .white {
   color: #fff;
 }
@@ -190,15 +118,15 @@ body {
   font-weight: 700;
   text-align: center;
   background-color: hotpink;
+  color: #fff;
   padding: 0.12rem 0.2rem;
-  margin: 0.12rem 0.12rem 0;
+  margin: 0.3rem 0.12rem 0;
   border-radius: 0.04rem;
 }
+
 .display-hide {
   display: none;
 }
-
-
 
 .borrow-dialog-mask {
   display: none;
@@ -237,8 +165,6 @@ body {
   margin: 0.64rem auto 0;
 }
 
-
-
 .money-area {
   display: flex;
   padding: 0.2rem 0.12rem;
@@ -276,38 +202,43 @@ body {
   background-color: #F7480A;
 }
 
-.kiss-img {
-  width: 3rem;
+.welcome-area {
+  position: relative;
   height: 3rem;
-  background: url(https://gw.alipayobjects.com/mdn/rms_f839dd/afts/img/A*t52sRriOkWcAAAAAAAAAAABkARQnAQ);
+  background: url(https://gw.alipayobjects.com/mdn/rms_f839dd/afts/img/A*ppZxTaWbcMYAAAAAAAAAAABkARQnAQ);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
+}
+
+.welcome-text {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+}
+
+.activity-area {
+  margin: 0.3rem 0.12rem 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.activity-area-btn {
+  padding: 0.2rem;
+  border-radius: 0.08rem;
+  color: #fff;
+  background: #401DDC;
 }
 
 
 </style>
 </head>
 <body>
-    <div class="money-area">
-      <div class="cash money-area-item">
-        <div class="title">现金</div>
-        <div class="count">￥000</div>
-      </div>
-      <div class="coin money-area-item">
-        <div class="title">代币</div>
-        <div class="count">000</div>
-      </div>
-    </div>
-    <div class="machine">
-      <div class="item" data-color="red"></div>
-      <div class="item" data-color="pink"></div>
-      <div class="item" data-color="blue"></div>
-      <div class="item" data-color="green"></div>
-    </div>
-    <div class="tips">选一个上去玩啰~~~</div>
+    <div class="btn charge-btn" data-value="5">充值现金￥5</div>
+    <div class="btn charge-btn" data-value="10">充值现金￥10</div>
+    <div class="btn charge-btn" data-value="20">充值现金￥20</div>
+    <div class="btn charge-btn" data-value="50">充值现金￥50</div>
 
-    <div class="kiss-btn btn white display-hide">什么？你想亲亲</div>
-    <div class="back-btn btn white">回去玩其他的</div>
     <div class="borrow-dialog-mask">
     </div>
     <!-- LeanCloud -->
@@ -318,12 +249,6 @@ body {
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
     <script type="text/javascript">
-        var $cash = $('.cash .count');
-        var $coin = $('.coin .count');
-        var myMoney;
-        var userInfo;
-        var colorMap = ['', '', '', '']
-        
         var APP_ID = 'vvfkzsnHX0kRDYxqEULlziNe-gzGzoHsz';
         var APP_KEY = 'jSUzmr7lOp4Y9VbKqySCMTMO';
         AV.init({
@@ -345,145 +270,24 @@ body {
               id:money[0].id,
             }
 
-            // 修改头部钱信息
-            $cash.text('￥' + myMoney.cash)
-            $coin.text(myMoney.coin)
-
-            // 提醒
-            if(myMoney.coin <= 0) {
-              setTimeout(function(){
-                window.alert('宝贝，没有代币了要记得充钱哦~~')
-              }, 0)
-            }
-
-
-
-            $('.item').click(function() {
-              var coloeSelected = $(this).data('color')
-              if(myMoney.coin <=0) {
-                window.alert('没代币了要回去充值！！！')
-                return
-              }
-
-              if(hasSelected) {
-                return
-              }
-              hasSelected = true
-              $('.kiss-btn').removeClass('display-hide');
-
+            $('.charge-btn').click(function() {
               var account = AV.Object.createWithoutData('money', myMoney.id);
-              // 对 balance 原子减少 5
-              var amountReduce = -5;
-              account.increment('coin', amountReduce);
+              // 充值
+              var amountIncrease = Number($(this).data('value'));
+              account.increment('cash', amountIncrease);
               account.save(null, {
                 fetchWhenSave: true
               }).then(function (newAccount){
-
-              // 声明 class
-              var Record = AV.Object.extend('record');
-                // 构建对象
-                var record = new Record();
-                // 为属性赋值
-                record.set('cost', amountReduce);
-                record.set('project', '摩天轮');
-                record.set('detail', {
-                  color: coloeSelected,
-                })
-
-                // 将对象保存到云端
-                record.save().then(function (record) {
-                  // 成功保存之后，执行其他逻辑
-                  console.log('保存项目游玩记录成功。objectId：' + record.id);
-                }, function (error) {
-                  console.log('保存项目游玩记录失败', error);
-                });
-
-
-
                 console.log('newAccount', newAccount)
-                myMoney.coin = newAccount.attributes.coin
-                // 修改头部钱信息
-                $cash.text('￥' + myMoney.cash)
-                $coin.text(myMoney.coin)
+                myMoney.cash = newAccount.attributes.cash
+                window.alert('充值成功!!现在有现金￥' + myMoney.cash)
               });
-              $('.tips').addClass('white')
-              $('.item').removeClass('img-here')
-              $machine.addClass('action');
-              $(this).addClass('img-here')
             })
           })
         }, function (error) {
           console.log('user', error)
           
         });
-
-        var $machine = $('.machine');
-        var hasSelected = false;
-
-        $('.back-btn').click(function() {
-          location.href = './index.html'
-        })
-/**
- * 
- *
- * @param {*} option
- *              dom         --- 弹窗的内容
- *              closeBtn    --- 是否有关闭按钮
- *              beforeClick --- 点击行动点之前的钩子函数
- */
-var Dialog = function (option){
-    const me = this
-    if (!option) {
-        console.log('Dialog opt error!')
-        return
-    }
-    me.option = option
-    me.init(option)
-}
-Dialog.prototype = {
-    constructor: Dialog,
-    init(option) {
-        console.log('option', option)
-        const me = this
-        const { dom, closeBtn = true } = option
-        const dialogWrapper = $('<div class="borrow-dialog-wrapper"></div>')
-        me.dialogDom = dialogWrapper.append(dom)
-        $('body').append(dialogWrapper.append(dom))
-
-        if(closeBtn) {
-            const closeButton = $('<div class="borrow-dialog-close-btn"></div>')
-            me.closeButton = closeButton
-            dialogWrapper.append(closeButton)
-            closeButton.on('click', () => {
-                me.hide()
-            })
-        }
-    },
-
-    show() {
-        const me = this
-        console.log('me.dialogDom', me.dialogDom)
-        me.dialogDom.addClass('borrow-dialog-show')
-        $('.borrow-dialog-mask').addClass('borrow-dialog-show')
-    },
-
-    hide() {
-        const me = this
-        me.dialogDom.removeClass('borrow-dialog-show')
-        $('.borrow-dialog-mask').removeClass('borrow-dialog-show')
-    }
-}
-
-
-var dialog = new Dialog({
-  dom: $('<div class="kiss-img"></div>'),
-  closeBtn: true,
-});
-
-$('.kiss-btn').click(function() {
-  dialog.show();
-});
-const noopTrue = () => true
 
     </script>
 </head>
