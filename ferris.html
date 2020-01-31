@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>摩天轮</title>
+    <meta property="og:image" content="https://gw.alipayobjects.com/mdn/credit_1212/afts/img/A*W0oeRouF_6sAAAAAAAAAAABjAQAAAQ/original">
+    <link rel="shortcut icon" type="image/png" href="https://gw.alipayobjects.com/mdn/credit_1212/afts/img/A*W0oeRouF_6sAAAAAAAAAAABjAQAAAQ/original">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <style>
+        /* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+margin: 0;
+padding: 0;
+border: 0;
+font-size: 100%;
+font: inherit;
+vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+display: block;
+}
+body {
+line-height: 1;
+}
+ol, ul {
+list-style: none;
+}
+blockquote, q {
+quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+content: '';
+content: none;
+}
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+
+@media only screen and (min-width:320px) and (max-width:320px) {
+  html {
+      font-size: 85.33px
+  }
+}
+
+@media only screen and (min-width:360px) {
+  html {
+      font-size: 96px
+  }
+}
+
+@media only screen and (min-width:375px) {
+  html {
+      font-size: 100px
+  }
+}
+
+@media only screen and (min-width:384px) {
+  html {
+      font-size: 102.4px
+  }
+}
+
+@media only screen and (min-width:412px) {
+  html {
+      font-size: 109.87px
+  }
+}
+
+@media only screen and (min-width:414px) {
+  html {
+      font-size: 110.4px
+  }
+}
+
+@media only screen and (min-width:600px) {
+  html {
+      font-size: 204.8px
+  }
+}
+html {
+  font-family: STKaiti;
+}
+
+body {
+  font-size: 0.16rem;
+}
+
+.machine {
+  margin: 1rem auto 0;
+  width: 3rem;
+  height: 3rem;
+  border: black;
+  position: relative;
+  background: url(https://gw.alipayobjects.com/mdn/rms_f839dd/afts/img/A*wizXSZirglUAAAAAAAAAAABkARQnAQ);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.action {
+  animation: orbit-rotate 10s linear infinite;
+}
+
+.item {
+  position: absolute;
+  width: 0.75rem;
+  height: 0.75rem;
+  font-size: 0.16rem;
+}
+
+.item.img-here {
+  background: url(https://gw.alipayobjects.com/mdn/rms_f839dd/afts/img/A*tsdrSqlnzxMAAAAAAAAAAABkARQnAQ);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.item:first-child {
+  top: 0;
+  left: 0;
+  background-color: #FF3333;
+}
+
+.item:nth-child(2) {
+  top: 0;
+  right: 0;
+  background-color: #FFEAEA;
+}
+
+.item:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  background-color: #4C6CF0;
+}
+
+.item:nth-child(4) {
+  bottom: 0;
+  left: 0;
+  background-color: #50FA10;
+}
+
+@keyframes orbit-rotate {
+  0% {
+    transform: rotateZ(0deg);
+    /* transform-origin: 0rem 1rem; */
+  }
+
+  100% {
+    transform: rotateZ(-360deg);
+    /* transform-origin: 0rem 1rem; */
+  } 
+}
+
+.kiss-btn {
+  margin-top: 0.3rem;
+}
+
+
+.tips {
+  text-align: center;
+  margin: 0.14rem;
+}
+.white {
+  color: #fff;
+}
+.btn {
+  font-weight: 700;
+  text-align: center;
+  background-color: hotpink;
+  padding: 0.12rem 0.2rem;
+  margin: 0.12rem 0.12rem 0;
+  border-radius: 0.04rem;
+}
+.display-hide {
+  display: none;
+}
+
+
+
+.borrow-dialog-mask {
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.6;
+  z-index: 999;
+}
+
+.borrow-dialog-mask.borrow-dialog-show{
+  display: block;
+}
+
+.borrow-dialog-wrapper {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+.borrow-dialog-wrapper.borrow-dialog-show {
+  display: block;
+}
+
+.borrow-dialog-close-btn {
+  width: 0.3rem;
+  height: 0.3rem;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAMAAAC7m5rvAAAAYFBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABPT0+KiooZGRnz8/P09PTi4uIuLi7j4+OMjIw+dHvTAAAAIHRSTlMABCA6SlhfZAcnRmJmMmECKVwLUhYlY32XbO3w2XLbl/R32NoAAAEqSURBVHgB1NIFbsUwFETRhmnCjPvfZdHtc5oJCv8VBXwk09vLZpiW7bie5zq2ZRrXjB+EEbSiMPBPkREn2JTExiFKsxy0PEv3VVFit7LYU1WOg/KKq7rBYU1NFU4jrmrOWbOZZ5HjQnmxVmmJS5XpimW4WKYrQ6bYdj3+1XetTNPQWCxqGKd5reZpHMTFony5h904Kqepcezkfsq9DrQJTeJETdrEgz8WQprF6a9S+KuMCMxxhchQzASY4wowFbPAHVewFLPBHVewFXNA3bJQBUcxF9xxBVcxD8QtX2ohCt5T9nySz7fko9k6NgAAiAAYOIr9t9Sq4Co/wiMJDgDHLcvlq0yH42daoBAzFBxBDjzAK8Dc1KGici26hF35HhieMx5Pnmoehg9fAjCDaQAoRKM+AAAAAElFTkSuQmCC);
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0.64rem auto 0;
+}
+
+
+
+.money-area {
+  display: flex;
+  padding: 0.2rem 0.12rem;
+  background: #333;
+  /* justify-content: space-between; */
+}
+
+.money-area-item {
+  border-radius: 0.08rem;
+  display: flex;
+  align-items: center;
+  background: #AAA7A6;
+  color: #fff;
+}
+
+.money-area-item + .money-area-item {
+  margin-left: 0.2rem;
+}
+
+.money-area-item .title {
+  padding: 0.08rem;
+  margin-right: 0.03rem;
+  border-radius: 0.08rem 0 0 0.08rem;
+}
+
+.money-area-item .count {
+  padding: 0.08rem 0.1rem 0.08rem 0.04rem;
+}
+
+.cash .title {
+  background-color: #5AF122;
+}
+
+.coin .title {
+  background-color: #F7480A;
+}
+
+.kiss-img {
+  width: 3rem;
+  height: 3rem;
+  background: url(https://gw.alipayobjects.com/mdn/rms_f839dd/afts/img/A*t52sRriOkWcAAAAAAAAAAABkARQnAQ);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+</style>
+</head>
+<body>
+    <div class="money-area">
+      <div class="cash money-area-item">
+        <div class="title">现金</div>
+        <div class="count">￥000</div>
+      </div>
+      <div class="coin money-area-item">
+        <div class="title">代币</div>
+        <div class="count">000</div>
+      </div>
+    </div>
+    <div class="machine">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+    <div class="tips">选一个上去玩啰~~~</div>
+
+    <div class="kiss-btn btn white display-hide">什么？你想亲亲</div>
+    <div class="back-btn btn white">回去玩其他的</div>
+    <div class="borrow-dialog-mask">
+    </div>
+    <!-- LeanCloud -->
+    <script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        var $cash = $('.cash .count');
+        var $coin = $('.coin .count');
+        var myMoney;
+        var userInfo;
+        
+        var APP_ID = 'vvfkzsnHX0kRDYxqEULlziNe-gzGzoHsz';
+        var APP_KEY = 'jSUzmr7lOp4Y9VbKqySCMTMO';
+        AV.init({
+            appId: APP_ID,
+            appKey: APP_KEY
+        });
+
+        AV.User.logInWithMobilePhone('15602310830', '083000').then(function (user) {
+          // 登录成功
+          console.log('user', user)
+          userInfo = user;
+          var query = new AV.Query('money');
+          query.equalTo('userid', user.id);
+          query.find().then(function (money) {
+            console.log('money', money)
+            myMoney = {
+              cash:money[0].attributes.cash,
+              coin:money[0].attributes.coin,
+              id:money[0].id,
+            }
+
+            // 修改头部钱信息
+            $cash.text('￥' + myMoney.cash)
+            $coin.text(myMoney.coin)
+
+            // 提醒
+            if(myMoney.coin <= 0) {
+              setTimeout(function(){
+                window.alert('宝贝，没有代币了要记得充钱哦~~')
+              }, 0)
+            }
+
+
+
+            $('.item').click(function() {
+              if(myMoney.coin <=0) {
+                window.alert('没代币了要回去充值！！！')
+                return
+              }
+
+              if(!hasSelected) {
+                hasSelected = true
+                $('.kiss-btn').removeClass('display-hide');
+
+                var account = AV.Object.createWithoutData('money', myMoney.id);
+                // 对 balance 原子减少 5
+                var amountReduce = -5;
+                account.increment('coin', amountReduce);
+                account.save(null, {
+                  fetchWhenSave: true
+                }).then(function (newAccount){
+                  console.log('newAccount', newAccount)
+                  myMoney.coin = newAccount.attributes.coin
+                  // 修改头部钱信息
+                  $cash.text('￥' + myMoney.cash)
+                  $coin.text(myMoney.coin)
+                });
+              }
+              $('.tips').addClass('white')
+              $('.item').removeClass('img-here')
+              $machine.addClass('action');
+              $(this).addClass('img-here')
+            })
+          })
+        }, function (error) {
+          console.log('user', error)
+          
+        });
+
+        var $machine = $('.machine');
+        var hasSelected = false;
+
+        $('.back-btn').click(function() {
+          location.href = './index.html'
+        })
+/**
+ * 
+ *
+ * @param {*} option
+ *              dom         --- 弹窗的内容
+ *              closeBtn    --- 是否有关闭按钮
+ *              beforeClick --- 点击行动点之前的钩子函数
+ */
+var Dialog = function (option){
+    const me = this
+    if (!option) {
+        console.log('Dialog opt error!')
+        return
+    }
+    me.option = option
+    me.init(option)
+}
+Dialog.prototype = {
+    constructor: Dialog,
+    init(option) {
+        console.log('option', option)
+        const me = this
+        const { dom, closeBtn = true } = option
+        const dialogWrapper = $('<div class="borrow-dialog-wrapper"></div>')
+        me.dialogDom = dialogWrapper.append(dom)
+        $('body').append(dialogWrapper.append(dom))
+
+        if(closeBtn) {
+            const closeButton = $('<div class="borrow-dialog-close-btn"></div>')
+            me.closeButton = closeButton
+            dialogWrapper.append(closeButton)
+            closeButton.on('click', () => {
+                me.hide()
+            })
+        }
+    },
+
+    show() {
+        const me = this
+        console.log('me.dialogDom', me.dialogDom)
+        me.dialogDom.addClass('borrow-dialog-show')
+        $('.borrow-dialog-mask').addClass('borrow-dialog-show')
+    },
+
+    hide() {
+        const me = this
+        me.dialogDom.removeClass('borrow-dialog-show')
+        $('.borrow-dialog-mask').removeClass('borrow-dialog-show')
+    }
+}
+
+
+var dialog = new Dialog({
+  dom: $('<div class="kiss-img"></div>'),
+  closeBtn: true,
+});
+
+$('.kiss-btn').click(function() {
+  dialog.show();
+});
+const noopTrue = () => true
+
+    </script>
+</head>
+</body>
+</html>
