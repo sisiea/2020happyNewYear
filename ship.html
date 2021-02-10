@@ -427,6 +427,8 @@
 
 
     $('#start-btn').click(() => {
+      $('#screem-mp3')[0].play();
+      $('#screem-mp3')[0].pause()
       const timer1 = new Timer(1900, () => {
         // $('.machine').removeClass('start')
         $('.scream-img').removeClass('display-hide').addClass('transform')
